@@ -10,5 +10,4 @@ deploy:
     manifests:
     - deployment.yaml
     - pod.yaml
-    - rs.yaml
     - service.yaml
