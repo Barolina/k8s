@@ -1,0 +1,14 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: hello
+build:
+  artifacts:
+  - image: barolina/hello
+deploy:
+  kubectl:
+    manifests:
+    - deployment.yaml
+    - pod.yaml
+    - rs.yaml
+    - service.yaml
