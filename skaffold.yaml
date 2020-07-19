@@ -5,9 +5,11 @@ metadata:
 build:
   artifacts:
   - image: barolina/hello
+    context: hello
 deploy:
   kubectl:
     manifests:
     - deployment.yaml
+    - ingress.yaml
     - pod.yaml
     - service.yaml
