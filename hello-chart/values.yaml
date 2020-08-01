@@ -1,0 +1,24 @@
+replicaCount: 2
+
+image: barolina/hello
+
+service:
+  type: NodePort
+  port: 9000
+  name: my-app
+
+postgresql:
+  enabled: true
+  postgresqlUsername: myuser
+  postgresqlPassword: passwd
+  postgresqlDatabase: myapp
+  service:
+    port: "5432"
+    type: NodePort
+    nodePort: 32000
+
+
+
+postgresqlUsername: myuser
+postgresqlPassword: passwd
+postgresqlDatabase: myapp
