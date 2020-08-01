@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "http://arch.homework/otusapp/larisa/health",
+			"name": "users",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -15,7 +15,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://arch.homework/otusapp/larisa/health",
+					"raw": "http://arch.homework/otusapp/larisa/users",
 					"protocol": "http",
 					"host": [
 						"arch",
@@ -24,13 +24,13 @@
 					"path": [
 						"otusapp",
 						"larisa",
-						"health"
+						"users"
 					]
 				}
 			},
 			"response": [
 				{
-					"name": "http://arch.homework/otusapp/larisa/health",
+					"name": "get users",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -39,7 +39,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://arch.homework/otusapp/larisa/health",
+							"raw": "http://arch.homework/otusapp/larisa/users",
 							"protocol": "http",
 							"host": [
 								"arch",
@@ -48,7 +48,7 @@
 							"path": [
 								"otusapp",
 								"larisa",
-								"health"
+								"users"
 							]
 						}
 					},
@@ -62,7 +62,278 @@
 						},
 						{
 							"key": "Date",
-							"value": "Sun, 19 Jul 2020 19:28:34 GMT"
+							"value": "Sat, 01 Aug 2020 18:57:43 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[{\"id\": 2, \"name\": \"vasya\"}]"
+				}
+			]
+		},
+		{
+			"name": "user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "vasya",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/larisa/adduser",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"larisa",
+						"adduser"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "user  add",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "vasya",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://arch.homework/otusapp/larisa/adduser",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"otusapp",
+								"larisa",
+								"adduser"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.17.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 01 Aug 2020 18:58:07 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\"status\": \"ok\"}"
+				}
+			]
+		},
+		{
+			"name": "user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "vasya",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/larisa/users/3",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"larisa",
+						"users",
+						"3"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "user delete",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "vasya",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://arch.homework/otusapp/larisa/users/3",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"otusapp",
+								"larisa",
+								"users",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.17.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 01 Aug 2020 18:58:29 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\"status\": \"ok\"}"
+				}
+			]
+		},
+		{
+			"name": "user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "vasya",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://arch.homework/otusapp/larisa/users/2",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"larisa",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "user update",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "vasya",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://arch.homework/otusapp/larisa/users/2",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"otusapp",
+								"larisa",
+								"users",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.17.10"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 01 Aug 2020 18:59:06 GMT"
 						},
 						{
 							"key": "Content-Type",
