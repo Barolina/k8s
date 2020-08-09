@@ -12,13 +12,27 @@ postgresql:
   postgresqlUsername: myuser
   postgresqlPassword: passwd
   postgresqlDatabase: myapp
+  dataDir: /var/lib/postgresql/data/pgdata
   service:
     port: "5432"
     type: NodePort
     nodePort: 32000
 
 
+persistence:
+  mountPath: /var/lib/postgresql	
 
 postgresqlUsername: myuser
 postgresqlPassword: passwd
 postgresqlDatabase: myapp
+
+
+metrics:
+  serviceMonitor:
+    enabled: true
+
+ingress:
+  enabled: true
+  hosts:
+    - host: arch.homework
+      paths: ["/larisa"]

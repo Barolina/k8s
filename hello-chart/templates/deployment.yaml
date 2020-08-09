@@ -20,8 +20,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image }}
           ports:
-              - name: web 
+              - name: http
                 containerPort: 80
+                protocol: TCP
           env:
             - name: DATABASE_URI
               valueFrom:

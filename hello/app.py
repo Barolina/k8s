@@ -2,6 +2,7 @@ import os
 import json
 
 from flask import Flask, redirect, url_for, request
+from metrics import register_metrics
 
 app = Flask(__name__)
 
@@ -76,6 +77,12 @@ def update_client(user_id):
     except:
       return json.dumps({"error": "not found user"})
 
+@app.route('/metrics')
+def metrics():
+    from prometheus_client import generate_latest
+    return generate_latest()
+
 
 if __name__ == "__main__":
+    register_metrics(app)
     app.run(host='0.0.0.0', port='80', debug=True)

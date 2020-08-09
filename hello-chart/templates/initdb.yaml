@@ -31,6 +31,14 @@ spec:
               value: {{ include "postgresql.fullname" . | quote }}
             - name: POSTGRES_PORT
               value: {{ .Values.postgresql.service.port | quote }}
+            {{- if .Values.postgresql.initdbWalDir }}
+            - name: POSTGRES_INITDB_WALDIR
+              value: {{ .Values.postgresql.initdbWalDir | quote }}
+            {{- end }}
+            {{- if .Values.persistence.mountPath }}
+            - name: PGDATA
+              value: {{ .Values.postgresql.dataDir | quote }}
+            {{- end }}
           command:
             - sh
             - "-c"
