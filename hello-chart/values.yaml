@@ -17,7 +17,9 @@ postgresql:
     port: "5432"
     type: NodePort
     nodePort: 32000
-
+  persistence:
+    size: 0.1Gi
+    mountPath: /var/lib/postgresql
 
 persistence:
   mountPath: /var/lib/postgresql	
@@ -27,12 +29,18 @@ postgresqlPassword: passwd
 postgresqlDatabase: myapp
 
 
-metrics:
-  serviceMonitor:
-    enabled: true
+# metrics:
+#  serviceMonitor:
+#    enabled: true
+
+#ingress:
+#  enabled: true
+#  hosts:
+#    - host: arch.homework
+#      paths: ["/larisa"]
 
 ingress:
-  enabled: true
+  enabled: false
   hosts:
     - host: arch.homework
-      paths: ["/larisa"]
+      paths: ["/hello"]

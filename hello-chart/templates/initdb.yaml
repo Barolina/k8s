@@ -56,8 +56,16 @@ spec:
           - "-c"
           - |
             psql $DATABASE_URI <<'EOF'
-              create table client (id SERIAL PRIMARY KEY, name varchar);
-              insert into client (name) values ('barolina');
+              drop table if exists auth_user;
+              create table auth_user (
+                  id serial primary key,
+                  login varchar not null unique,
+                  password varchar,
+                  email varchar not null default '',
+                  first_name varchar not null default '',
+                  last_name varchar not null default ''
+              );
+              insert into auth_user (login, password) values ('admin', 'admin');
             EOF
 
   backoffLimit: 0
