@@ -4,7 +4,7 @@ metadata:
   name: auth-proxy
 spec:
   rules:
-  - host: localhost
+  - host: arch.homework
     http:
       paths:
       - backend:

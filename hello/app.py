@@ -16,7 +16,6 @@ engine = create_engine(config['DATABASE_URI'], echo=True)
 SESSIONS = {}
 
 
-
 @app.route('/users/me')
 def me():
     if not 'X-UserId' in request.headers:
@@ -28,6 +27,7 @@ def me():
     data['first_name'] = request.headers['X-First-Name']
     data['last_name'] = request.headers['X-Last-Name']
     return data
+
 
 def generate_session_id(size=40):
     import string
@@ -82,6 +82,32 @@ def register():
     first_name = request_data.get('first_name', '')
     last_name = request_data.get('last_name', '')
     return register_user(login, password, email, first_name, last_name)
+
+
+@app.route('/update_profile/', methods=['PUT'])
+def update_client():
+    """ update  """
+    if 'session_id' in request.cookies:
+        session_id = request.cookies['session_id']
+        if session_id in SESSIONS:
+            data = SESSIONS[session_id]
+            data = app.make_response(data)
+            try:
+                with engine.connect() as connection:
+                    result = connection.execute(
+                        """
+                        update auth_user set login={}, password ={}, email={}, first_name={}, last_name={})
+                        where id={};
+                        """.format(request.form.get('login', data['login']),
+                                   request.form.get('password', data['password']),
+                                   request.form.get('email', data['email']),
+                                   request.form.get('first_name', data['first_name']),
+                                   request.form.get('last_name', data['last_name']), data['id']))
+                return {"status": "ok"}
+            except Exception as e:
+                print(e)
+                abort(400, "login/email already exists")
+    abort(401)
 
 
 @app.route("/login", methods=["POST"])
