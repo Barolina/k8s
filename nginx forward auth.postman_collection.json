@@ -260,43 +260,43 @@
 	],
 	"variable": [
 		{
-			"id": "65410419-20cc-4d41-bfe4-983ba2bedd1b",
+			"id": "35769c74-a741-4928-a1b9-b1e613ecb497",
 			"key": "IDtoken",
 			"value": "",
 			"disabled": true
 		},
 		{
-			"id": "db942733-14c9-460f-b455-7135382039d7",
+			"id": "646d3b0b-1650-40c7-a32d-e5693535093c",
 			"key": "password",
 			"value": ""
 		},
 		{
-			"id": "4b912e54-9f8f-4b02-ab40-c62980c60048",
+			"id": "60a5b85f-8d22-420f-b2f2-03b888a79ce8",
 			"key": "email",
 			"value": ""
 		},
 		{
-			"id": "2e10684a-3023-4ad9-997b-105ab587c18a",
+			"id": "37c2854f-e25e-45ea-bfc7-4f5ffd2fa044",
 			"key": "login",
 			"value": ""
 		},
 		{
-			"id": "3c9ac636-a301-4ac4-bbfa-2a8342dc1b9c",
+			"id": "0580dc01-ff24-409c-b076-90e6a092590a",
 			"key": "firstName",
 			"value": ""
 		},
 		{
-			"id": "087417e4-934c-4d68-bf82-15731becbe4c",
+			"id": "6118d8a3-b6fa-4dea-b674-9918d0235ae4",
 			"key": "lastName",
 			"value": ""
 		},
 		{
-			"id": "4b018c82-16f3-4410-b8cb-a06cc64df274",
+			"id": "cae62bdc-9117-472f-b88a-d78089f8b82e",
 			"key": "baseUrl",
 			"value": "http://arch.homework"
 		},
 		{
-			"id": "0b7f1866-64c4-4637-98e4-e0903299ae08",
+			"id": "aef3b2b7-4bcb-4596-99aa-04c33b5ae72f",
 			"key": "IDtoken",
 			"value": ""
 		}
