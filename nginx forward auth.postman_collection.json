@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "75c4a1cb-4cb1-4988-a7ee-17b23b253a8e",
+		"_postman_id": "98e2f03f-ba50-4843-8ea6-7f4e89a3ac03",
 		"name": "nginx forward auth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b85be0b7-03b3-4abd-9895-9662dfed7118",
+						"id": "8a8f5dfc-575d-423d-9437-0dd37f3173de",
 						"exec": [
 							""
 						],
@@ -21,7 +21,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "462236a7-d94c-45f9-b35a-9206cce3f689",
+						"id": "4698ec27-2aa5-46c3-9370-22e6ea6ef423",
 						"exec": [
 							"pm.collectionVariables.set(\"password\", pm.variables.replaceIn('{{$randomPassword}}'))",
 							"pm.collectionVariables.set(\"email\", pm.variables.replaceIn('{{$randomEmail}}'))",
@@ -38,7 +38,12 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"login\": \"{{login}}\", \n\t\"password\": \"{{password}}\",\n\t\"email\": \"{{email}}\",\n\t\"first_name\": \"{{firstName}}\",\n\t\"last_name\": \"{{lastName}}\"\n}\n"
+					"raw": "{\n\t\"login\": \"{{login}}\", \n\t\"password\": \"{{password}}\",\n\t\"email\": \"{{email}}\",\n\t\"first_name\": \"{{firstName}}\",\n\t\"last_name\": \"{{lastName}}\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "{{baseUrl}}/register",
@@ -53,12 +58,60 @@
 			"response": []
 		},
 		{
+			"name": "регистрация Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d73d5c2d-ba65-4e8c-8bbf-1573dd654c7c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e41880b1-f62e-42f2-a9f1-576e3059148d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\": \"{{login}}\", \n\t\"password\": \"{{password}}\",\n\t\"email\": \"{{email}}\",\n\t\"first_name\": \"{{firstName}}\",\n\t\"last_name\": \"{{lastName}}\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/update_profile",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"update_profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "логин",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "a22d2a5b-fc4c-4787-b128-7b9dbab942ac",
+						"id": "6525c2d9-61f2-4489-b6d0-57449642204c",
 						"exec": [
 							"var responseJSON = JSON.parse(responseBody)",
 							"pm.collectionVariables.set(\"IDtoken\", responseJSON[\"IDtoken\"])"
@@ -92,7 +145,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "4667b6a1-bb1c-4138-85f9-9a12cf159e90",
+						"id": "fffa5370-a8e2-4a3f-a6e1-b28597ea89ef",
 						"exec": [
 							"pm.test(\"test token data\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -116,10 +169,6 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{baseUrl}}/auth",
 					"host": [
@@ -137,10 +186,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{baseUrl}}/users/me",
 					"host": [
@@ -159,10 +204,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{baseUrl}}/logout",
 					"host": [
@@ -180,10 +221,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{baseUrl}}/users/me",
 					"host": [
@@ -202,7 +239,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "8f29dd8d-a61f-4451-a0fe-24bd4e90b596",
+				"id": "fe34b404-f5a3-4fe3-964a-92824a8f8124",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -212,7 +249,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "73dcf560-c5d6-4508-8a04-33e6a95cce3e",
+				"id": "d3672f5d-2e90-4e08-87e4-c141eb71ff42",
 				"type": "text/javascript",
 				"exec": [
 					"tests[\"[INFO] Request: \" + (('data' in request) ? request['data'] : '') ] = true;",
@@ -223,47 +260,46 @@
 	],
 	"variable": [
 		{
-			"id": "325f2354-7090-4a2d-abaf-0fdd443af7f7",
+			"id": "65410419-20cc-4d41-bfe4-983ba2bedd1b",
 			"key": "IDtoken",
 			"value": "",
-			"type": "string",
 			"disabled": true
 		},
 		{
-			"id": "68d48f5b-f34b-46c1-8cde-37718e67466f",
+			"id": "db942733-14c9-460f-b455-7135382039d7",
 			"key": "password",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
-			"id": "a9e32adb-6ea8-44f3-8a16-35e90b9b8155",
+			"id": "4b912e54-9f8f-4b02-ab40-c62980c60048",
 			"key": "email",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
-			"id": "1a2f607d-eee4-4974-b76d-7d3534bc80a9",
+			"id": "2e10684a-3023-4ad9-997b-105ab587c18a",
 			"key": "login",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
-			"id": "d5925616-2a39-49a8-850d-bf1113757493",
+			"id": "3c9ac636-a301-4ac4-bbfa-2a8342dc1b9c",
 			"key": "firstName",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
-			"id": "d4916d50-9f21-4f8e-971f-dc1c185501be",
+			"id": "087417e4-934c-4d68-bf82-15731becbe4c",
 			"key": "lastName",
-			"value": "",
-			"type": "string"
+			"value": ""
 		},
 		{
-			"id": "ccb2f76b-ca6f-49e1-a07f-25394158438e",
+			"id": "4b018c82-16f3-4410-b8cb-a06cc64df274",
 			"key": "baseUrl",
-			"value": "http://arch.homework",
-			"type": "string"
+			"value": "http://arch.homework"
+		},
+		{
+			"id": "0b7f1866-64c4-4637-98e4-e0903299ae08",
+			"key": "IDtoken",
+			"value": ""
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
