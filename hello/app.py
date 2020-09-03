@@ -20,7 +20,7 @@ SESSIONS = {}
 @app.route('/users/me')
 def me():
     if not 'X-UserId' in request.headers:
-        return "Not authenticated"
+        return "Not authenticated yes"
     data = {}
     data['id'] = request.headers['X-UserId']
     data['login'] = request.headers['X-User']
@@ -28,8 +28,6 @@ def me():
     data['first_name'] = request.headers['X-First-Name']
     data['last_name'] = request.headers['X-Last-Name']
     return data
-
-
 
 def generate_session_id(size=40):
     import string

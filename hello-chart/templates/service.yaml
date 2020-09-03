@@ -11,5 +11,6 @@ spec:
       targetPort: http
       name: web
       protocol: TCP
+      nodePort: 30000
   selector:
     {{- include "hello-chart.selectorLabels" . | nindent 4 }}

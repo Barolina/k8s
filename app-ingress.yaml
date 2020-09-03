@@ -3,12 +3,12 @@ kind: Ingress
 metadata:
   name: app
   annotations:
-    nginx.ingress.kubernetes.io/auth-url: "http://larisa-hello-chart.default.svc.cluster.local:9000/auth"
-    nginx.ingress.kubernetes.io/auth-signin: "http://$host/signin"
+    nginx.ingress.kubernetes.io/auth-url: "http://auth-proxy.default.svc.cluster.local:9000/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "http://auth-proxy.default.svc.cluster.local:9000/signin"
     nginx.ingress.kubernetes.io/auth-response-headers: "X-User,X-Email,X-UserId,X-First-Name,X-Last-Name"
 spec:
   rules:
-  - host: arch.homework
+  - host: localhost
     http:
       paths:
       - backend:
