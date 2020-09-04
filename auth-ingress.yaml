@@ -27,7 +27,3 @@ spec:
           serviceName: larisa-hello-chart
           servicePort: 9000
         path: /auth
-      - backend:
-          serviceName: larisa-hello-chart
-          servicePort: 9000
-        path: /update_profile

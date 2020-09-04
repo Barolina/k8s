@@ -84,30 +84,41 @@ def register():
     return register_user(login, password, email, first_name, last_name)
 
 
-@app.route('/update_profile/', methods=['PUT'])
+@app.route('/update_profile', methods=['PUT'])
 def update_client():
     """ update  """
-    if 'session_id' in request.cookies:
+    if not 'X-UserId' in request.headers:
+        return "Not authenticated yes"
+    request_data = request.get_json()
+    data = {}
+    data['id'] = request.headers['X-UserId']
+    data['login'] = request.headers['X-User']
+    data['email'] = request.headers['X-Email']
+    data['first_name'] = request_data.get('first_name',request.headers['X-First-Name'])
+    data['last_name'] = request_data.get('last_name',request.headers['X-Last-Name'])
+    with engine.connect() as connection:
+        connection.execute(
+            """
+            update auth_user set first_name ='{}', last_name ='{}' where id={};
+            """.format(data['first_name'], data['last_name'], data['id']))
+
+    try:
         session_id = request.cookies['session_id']
-        if session_id in SESSIONS:
-            data = SESSIONS[session_id]
-            data = app.make_response(data)
-            try:
-                with engine.connect() as connection:
-                    result = connection.execute(
-                        """
-                        update auth_user set login={}, password ={}, email={}, first_name={}, last_name={})
-                        where id={};
-                        """.format(request.form.get('login', data['login']),
-                                   request.form.get('password', data['password']),
-                                   request.form.get('email', data['email']),
-                                   request.form.get('first_name', data['first_name']),
-                                   request.form.get('last_name', data['last_name']), data['id']))
-                return {"status": "ok"}
-            except Exception as e:
-                print(e)
-                abort(400, "login/email already exists")
-    abort(401)
+        SESSIONS[session_id] = data
+    except Exception as e:
+        raise Exception("not session " + e)
+
+    try:
+        response = app.make_response(data)
+        response.headers['X-UserId'] = data['id']
+        response.headers['X-User'] = data['login']
+        response.headers['X-Email'] = data['email']
+        response.headers['X-First-Name'] = data['first_name']
+        response.headers['X-Last-Name'] = data['last_name']
+        return response
+    except Exception as e:
+        raise Exception("error in create header " + e)
+
 
 
 @app.route("/login", methods=["POST"])

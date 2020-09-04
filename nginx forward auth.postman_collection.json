@@ -58,54 +58,6 @@
 			"response": []
 		},
 		{
-			"name": "регистрация Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d73d5c2d-ba65-4e8c-8bbf-1573dd654c7c",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "e41880b1-f62e-42f2-a9f1-576e3059148d",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"login\": \"{{login}}\", \n\t\"password\": \"{{password}}\",\n\t\"email\": \"{{email}}\",\n\t\"first_name\": \"{{firstName}}\",\n\t\"last_name\": \"{{lastName}}\"\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/update_profile",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"update_profile"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "логин",
 			"event": [
 				{
@@ -125,7 +77,12 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"login\": \"{{login}}\", \"password\": \"{{password}}\"}"
+					"raw": "{\"login\": \"{{login}}\", \"password\": \"{{password}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "{{baseUrl}}/login",
@@ -200,6 +157,96 @@
 			"response": []
 		},
 		{
+			"name": "обновление профиля",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d73d5c2d-ba65-4e8c-8bbf-1573dd654c7c",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e41880b1-f62e-42f2-a9f1-576e3059148d",
+						"exec": [
+							"pm.collectionVariables.set(\"firstNameUpdate\", pm.variables.replaceIn('{{$randomFirstName}}'))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"first_name\": \"{{firstNameUpdate}}\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/update_profile",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"update_profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "проверить данные о пользователе  после обновления",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8800a7ed-c533-48a5-925f-b27594bc44ce",
+						"exec": [
+							"pm.test(\"test token data\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.email).to.eql(pm.collectionVariables.get(\"email\"))",
+							"    pm.expect(jsonData.last_name).to.eql(pm.collectionVariables.get(\"lastName\"))",
+							"    pm.expect(jsonData.first_name).to.eql(pm.collectionVariables.get(\"firstNameUpdate\"))",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{IDtoken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/auth",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "логаут",
 			"request": {
 				"method": "GET",
@@ -260,44 +307,49 @@
 	],
 	"variable": [
 		{
-			"id": "35769c74-a741-4928-a1b9-b1e613ecb497",
+			"id": "69718090-ed27-425f-a025-8ffe8f80507a",
 			"key": "IDtoken",
 			"value": "",
 			"disabled": true
 		},
 		{
-			"id": "646d3b0b-1650-40c7-a32d-e5693535093c",
+			"id": "6a6d2dca-88b7-4e2b-a90c-9357a7f69adb",
 			"key": "password",
 			"value": ""
 		},
 		{
-			"id": "60a5b85f-8d22-420f-b2f2-03b888a79ce8",
+			"id": "1fd8360c-d8a2-417b-aff7-0aacad526aaa",
 			"key": "email",
 			"value": ""
 		},
 		{
-			"id": "37c2854f-e25e-45ea-bfc7-4f5ffd2fa044",
+			"id": "54ca29db-dffe-4f8d-91c2-8f88c1225901",
 			"key": "login",
 			"value": ""
 		},
 		{
-			"id": "0580dc01-ff24-409c-b076-90e6a092590a",
+			"id": "8f6ccdb1-b0c2-4fb4-8715-5bf2227f6d87",
 			"key": "firstName",
 			"value": ""
 		},
 		{
-			"id": "6118d8a3-b6fa-4dea-b674-9918d0235ae4",
+			"id": "9724fa5f-fb7c-4c19-8433-a0044756e5c6",
 			"key": "lastName",
 			"value": ""
 		},
 		{
-			"id": "cae62bdc-9117-472f-b88a-d78089f8b82e",
+			"id": "825cca2f-5d05-4ddb-b786-9c40d6c402eb",
 			"key": "baseUrl",
 			"value": "http://arch.homework"
 		},
 		{
-			"id": "aef3b2b7-4bcb-4596-99aa-04c33b5ae72f",
+			"id": "978952a0-102c-424f-a1b5-e4e7ab098c88",
 			"key": "IDtoken",
+			"value": ""
+		},
+		{
+			"id": "14051385-2e59-4527-989d-1ebad5035de3",
+			"key": "firstNameUpdate",
 			"value": ""
 		}
 	],
