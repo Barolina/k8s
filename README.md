@@ -17,11 +17,12 @@ helm install larisa ./hello-chart/
 
 ```
 
-### achitecture
+### architecture
 Архитектура решения
 
 ![igress_auth.PNG](./igress_auth.PNG)
 
+### test
 ```
 nginx forward auth
 
