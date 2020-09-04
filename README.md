@@ -1,9 +1,9 @@
 ### k8s
 hello-py in k8s
 
-### 1 add api gateway  like ingress nginx 
+-  api gateway  like ingress nginx 
 
-### 2  uses helm3  and helm-chart
+-  uses helm3  and helm-chart
 
 
 
