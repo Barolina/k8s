@@ -42,5 +42,5 @@ A lot of a get query )
 совмещенный  подход Event Notifications и Restfull. Оставила  хранение  информации о пользователе в JWT,   для  минимизации лишних  get запросов (  рамках данной задачи), 
 "простое лучше сложного) ". 
 
-Вот такое  схематичское апи https://documenter.getpostman.com/view/7669157/TVRhbp4Y
+Вот такое  схематичское апи https://documenter.getpostman.com/view/7669157/TVRhbp4Y#34dbcb41-16e2-4fcc-b60b-216612576e90
 
