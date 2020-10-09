@@ -32,6 +32,8 @@ A lot of a get query )
 
 ![event_collaboration](event_collaboration.png)
 
+Минусы данного подхода:
+
 Поддержа в консистентном состоянии локальной копии данных
 
 Вывод:
@@ -40,5 +42,5 @@ A lot of a get query )
 совмещенный  подход Event Notifications и Restfull. Оставила  хранение  информации о пользователе в JWT,   для  минимизации лишних  get запросов (  рамках данной задачи), 
 "простое лучше сложного) ". 
 
-
+Вот такое  схематичское апи https://documenter.getpostman.com/view/7669157/TVRhbp4Y
 
