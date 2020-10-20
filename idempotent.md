@@ -3,7 +3,7 @@
 - namespaces = default
 - ingress = True
 - generate uuid  and  save uuid in bd,  in header for idempotent
-- попыталась  съимитировать,  повтор  отправки  повторного запроса, просто  дубликатом  запроса в  постмане )
+- попыталась  съимитировать, идемпотентность дубликатом  запроса в  постмане )
 
 #### Install
 
