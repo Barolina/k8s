@@ -5,16 +5,16 @@
 - generate uuid  and  save uuid in bd,  in header for idempotent
 - попыталась  съимитировать,  повтор  отправки  повторного запроса, просто  дубликатом  запроса в  постмане )
 
-#### Istall
+#### Install
 
 ```
 > minikube enable ingress
 > kubectl apply -f app-orders.yaml
 > helm install larisa ./hello-chart
 > newman run -n 2 "order idempotent.postman_collection.json"
-``
+```
 
-
+#### Test
 
 
 order idempotent
