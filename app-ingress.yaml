@@ -19,3 +19,7 @@ spec:
           serviceName: larisa-hello-chart
           servicePort: 9000
         path: /update_profile
+      - backend:
+          serviceName: larisa-hello-chart
+          servicePort: 9000
+        path: /buy/things

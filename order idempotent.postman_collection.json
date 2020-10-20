@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "0542084c-a95c-492e-830a-781706e33dca",
+		"name": "order idempotent",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "получить  список товаров",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ece6eaac-046f-40ff-99c5-65deda6a845d",
+						"exec": [
+							"pm.collectionVariables.set(\"id_thing\", _.random(1,4))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/things",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"things"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "получить  инфу  о товаре",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "feb7af37-d307-4a35-8732-8bfaf4e1687d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "14adf79c-210d-4747-aa57-9a278cdfcbc0",
+						"exec": [
+							"var responseJSON = JSON.parse(responseBody)",
+							"var responseHeaders = pm.response.headers.all()",
+							"pm.collectionVariables.set(\"tag_things\", pm.response.headers.get(\"Etag\"))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/things/{{id_thing}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"things",
+						"{{id_thing}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "купить  товар",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f478900-1837-47fc-9365-bc29276c5221",
+						"exec": [
+							"pm.test(\"test token data\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    var jsonData = pm.response.json();",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "{{tag_things}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": {{id_thing}}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/buy/things",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"buy",
+						"things"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "купить  товар  дубликат",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f3992e6-0801-4471-9529-e198a33c6a5f",
+						"exec": [
+							"pm.test(\"test token data\", function () {",
+							"    pm.response.to.have.status(429);",
+							"",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"type": "text",
+						"value": "{{id_thing}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\": {{id_thing}}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/buy/things",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"buy",
+						"things"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0b83d697-9999-4104-922f-07964e7a9301",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "46c1bb54-a254-42d9-8a9f-33d39454099d",
+				"type": "text/javascript",
+				"exec": [
+					"tests[\"[INFO] Request: \" + (('data' in request) ? request['data'] : '') ] = true;",
+					"tests[\"[INFO] Response: \" + responseBody] = true;"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "e351ca8b-677e-496b-8fa7-cc1ae0bfc5f6",
+			"key": "IDtoken",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"id": "615c968b-2b9e-44c2-8836-79705e47869a",
+			"key": "password",
+			"value": ""
+		},
+		{
+			"id": "d666bc2d-c448-46c7-9135-367e2f2820d0",
+			"key": "email",
+			"value": ""
+		},
+		{
+			"id": "fa278e64-ad65-4403-9777-6fdc273f7680",
+			"key": "login",
+			"value": ""
+		},
+		{
+			"id": "7c4099dc-8675-416c-a3cd-e8e5103e789a",
+			"key": "firstName",
+			"value": ""
+		},
+		{
+			"id": "612e2a93-5d99-44d5-bc6e-b0289f845b54",
+			"key": "lastName",
+			"value": ""
+		},
+		{
+			"id": "b0b9f4ab-5fd2-45db-aca1-0078e36e6300",
+			"key": "baseUrl",
+			"value": "http://arch.homework"
+		},
+		{
+			"id": "abbc7fb1-9d93-442c-839e-16e93257e9a1",
+			"key": "IDtoken",
+			"value": ""
+		},
+		{
+			"id": "debad212-6819-4b43-91eb-a68524e447ca",
+			"key": "firstNameUpdate",
+			"value": ""
+		},
+		{
+			"id": "d7551108-3019-486f-ba1e-9fd036642ab1",
+			"key": "id_thing",
+			"value": ""
+		},
+		{
+			"id": "09adc2d9-7e53-48a8-94f7-8d67e580857c",
+			"key": "tag_things",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

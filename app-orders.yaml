@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: order
+spec:
+  rules:
+  - host: arch.homework
+    http:
+      paths:
+      - backend:
+          serviceName: larisa-hello-chart
+          servicePort: 9000
+        path: /buy/things
+      - backend:
+          serviceName: larisa-hello-chart
+          servicePort: 9000
+        path: /things

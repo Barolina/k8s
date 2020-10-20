@@ -66,6 +66,19 @@ spec:
                   last_name varchar not null default ''
               );
               insert into auth_user (login, password) values ('admin', 'admin');
+              create table things(
+                  id serial primary key,
+                  name varchar not null unique,
+                  price serial  not null
+              );
+              create table hash_tag(
+                                id serial primary key,
+                                oid varchar not null unique
+                            );
+            insert into things(name, price) values('th_1', 2);
+            insert into things(name, price) values('th_3', 4);
+            insert into things(name, price) values('th_5', 6);
+            insert into things(name, price) values('th_6', 8);
             EOF
 
   backoffLimit: 0

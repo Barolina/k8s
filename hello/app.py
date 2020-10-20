@@ -1,6 +1,8 @@
+import time
+
 import os
 import json
-
+import uuid
 from flask import Flask, request, abort, redirect
 
 app = Flask(__name__)
@@ -14,6 +16,7 @@ from sqlalchemy import create_engine
 engine = create_engine(config['DATABASE_URI'], echo=True)
 
 SESSIONS = {}
+HASH_BYU = list()
 
 
 @app.route('/users/me')
@@ -27,6 +30,59 @@ def me():
     data['first_name'] = request.headers['X-First-Name']
     data['last_name'] = request.headers['X-Last-Name']
     return data
+
+
+@app.route('/buy/things', methods=["POST"])
+def buy():
+    request_data = request.get_json()
+    # add validation
+    id_things = request_data['id']
+    print(request.headers)
+    Etag = None
+    try:
+        Etag = request.headers['x-api-key']
+    except Exception as e:
+        print(e)
+        abort(400)
+
+    try:
+        with engine.connect() as connection:
+            result = connection.execute(
+                """
+                insert into hash_tag (oid)
+                values ('{}') returning id;
+                """.format(str(Etag))).first()
+        return {"status": "ok"}
+    except Exception as e:
+        print(e)
+        abort(429, "if you buy it")
+
+
+
+@app.route('/things')
+def things():
+    rows = []
+    with engine.connect() as connection:
+        result = connection.execute(
+            "select * from things")
+        rows = [dict(r.items()) for r in result]
+    return json.dumps(rows)
+
+
+@app.route('/things/<thing_id>')
+def things_id(thing_id):
+    engine = create_engine(config['DATABASE_URI'], echo=True)
+    with engine.connect() as connection:
+        result = connection.execute("select * from things where id =" + thing_id + ";")
+        rows = [dict(r.items()) for r in result]
+        print(result)
+        print("yest  result ")
+        response = app.make_response({"id": 1, "price": 2, "name": "th_1"})
+        if isinstance(rows, list):
+            response = app.make_response(rows[0])
+        e_tag = str(uuid.uuid4())
+        response.headers['Etag'] = e_tag
+    return response
 
 
 def generate_session_id(size=40):
@@ -94,8 +150,8 @@ def update_client():
     data['id'] = request.headers['X-UserId']
     data['login'] = request.headers['X-User']
     data['email'] = request.headers['X-Email']
-    data['first_name'] = request_data.get('first_name',request.headers['X-First-Name'])
-    data['last_name'] = request_data.get('last_name',request.headers['X-Last-Name'])
+    data['first_name'] = request_data.get('first_name', request.headers['X-First-Name'])
+    data['last_name'] = request_data.get('last_name', request.headers['X-Last-Name'])
     with engine.connect() as connection:
         connection.execute(
             """
@@ -118,7 +174,6 @@ def update_client():
         return response
     except Exception as e:
         raise Exception("error in create header " + e)
-
 
 
 @app.route("/login", methods=["POST"])
